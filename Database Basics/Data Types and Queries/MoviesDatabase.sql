@@ -1,3 +1,4 @@
+DROP DATABASE homework;
 CREATE DATABASE homework;
 
 CREATE TABLE directors (
@@ -63,4 +64,9 @@ INSERT INTO categories (category_name, notes)
 			 ('Russian', 'Almost the same'),
 			 ('North Korea', 'Ahahahha');
 
-DROP DATABASE homework;
+INSERT INTO movies (title, director_id, copyright_year, length, genre_id, category_id, notes) 
+	VALUES ('Americant Ninja', '1', '2017-05-27 16:27:12', '123123', '2', '3', 'Very Stupid MOvie'),
+			 ('Ivan Ivanovich', '2', '2017-05-27 16:27:12', '123123', '1', '2', 'Just a MOvie'),
+			 ('Mafia', '3', '2017-05-27 16:27:12', '123123', '3', '1', '...'),
+			 ('Fifty yards', '4', '2017-05-27 16:27:12', '123123', '5', '5', 'Query'),
+			 ('Klashes', '5', '2017-05-27 16:27:12', '123123', '4', '4', 'KAJHSDUhIAJSD');
