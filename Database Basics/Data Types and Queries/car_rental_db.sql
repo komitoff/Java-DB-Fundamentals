@@ -71,7 +71,7 @@ FOREIGN KEY (customer_id) REFERENCES customers(id);
 
 ALTER TABLE rental_orders
 ADD CONSTRAINT fk_car_id
-FOREIGN KEY (car_id) REFERENCES cars(id);
+FOREIGN KEY (employee_id) REFERENCES employees(id);
 
 INSERT INTO categories(category, daily_rate, weekly_rate, monthly_rate, weekend_rate) 
 	VALUES('Autos', 1.12, 1.51, 1.22, 2.11),
