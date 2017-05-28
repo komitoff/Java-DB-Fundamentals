@@ -14,11 +14,11 @@ CREATE TABLE categories (
 CREATE TABLE cars (
 	id INT(14) PRIMARY KEY AUTO_INCREMENT,
 	plate_number VARCHAR(50) NOT NULL,
-	make VARCHAR(100) NOT NULL,
-	model VARCHAR(100) NOT NULL,
-	car_year INT(4) NOT NULL,
+	make VARCHAR(250) NOT NULL,
+	model VARCHAR(250) NOT NULL,
+	car_year INT(5) NOT NULL,
 	category_id INT(14),
-	doors INT(1) NULL,
+	doors INT(2) NULL,
 	picture BLOB,
 	car_condition VARCHAR(250) NULL,
 	available BOOL DEFAULT false
@@ -26,19 +26,19 @@ CREATE TABLE cars (
 
 CREATE TABLE employees (
 	id INT(14) PRIMARY KEY AUTO_INCREMENT,
-	first_name VARCHAR(50) NOT NULL,
-	last_name VARCHAR(50) NOT NULL,
-	title VARCHAR(50) NOT NULL,
+	first_name VARCHAR(250) NOT NULL,
+	last_name VARCHAR(250) NOT NULL,
+	title VARCHAR(250) NOT NULL,
 	notes VARCHAR(250) NULL
 )ENGINE=InnoDB DEFAULT CHARACTER SET=utf8; 
 
 CREATE TABLE customers (
 	id INT(14) PRIMARY KEY AUTO_INCREMENT,
 	driver_licence_number INT(14) NOT NULL,
-	full_name VARCHAR(150) NOT NULL,
-	address VARCHAR(150) NOT NULL,
-	city VARCHAR(100) NOT NULL,
-	zip_code INT(8) NOT NULL,
+	full_name VARCHAR(250) NOT NULL,
+	address VARCHAR(250) NOT NULL,
+	city VARCHAR(250) NOT NULL,
+	zip_code INT(12) NOT NULL,
 	notes VARCHAR(250) NULL
 )ENGINE=InnoDB DEFAULT CHARACTER SET=utf8; 
 
@@ -48,19 +48,30 @@ CREATE TABLE rental_orders (
 	customer_id INT(14),
 	car_id INT(14),
 	car_condition VARCHAR(250) NULL,
-	tank_level FLOAT(10, 2) NOT NULL,
-	kilometrage_start INT(8) NOT NULL,
-	kilometrage_end INT(8) NOT NULL,
-	total_kilometrage INT(8) NOT NULL,
+	tank_level FLOAT(12, 2) NOT NULL,
+	kilometrage_start INT(12) NOT NULL,
+	kilometrage_end INT(12) NOT NULL,
+	total_kilometrage INT(12) NOT NULL,
 	start_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	end_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	total_days INT(4) DEFAULT 0,
-	rates_applied DECIMAL(10, 2) NOT NULL,
-	tax_rate DECIMAL(10, 2) NOT NULL,
-	order_status VARCHAR(10) DEFAULT 'inactive',
+	total_days INT(8) DEFAULT 0,
+	rates_applied DECIMAL(14, 2) NOT NULL,
+	tax_rate DECIMAL(14, 2) NOT NULL,
+	order_status VARCHAR(250) DEFAULT 'inactive',
 	notes VARCHAR(250) NULL
 ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8; 
 
+ALTER TABLE rental_orders
+ADD CONSTRAINT fk_employee_id
+FOREIGN KEY (employee_id) REFERENCES employees(id);
+
+ALTER TABLE rental_orders
+ADD CONSTRAINT fk_customer_id
+FOREIGN KEY (customer_id) REFERENCES customers(id);
+
+ALTER TABLE rental_orders
+ADD CONSTRAINT fk_car_id
+FOREIGN KEY (car_id) REFERENCES cars(id);
 
 INSERT INTO categories(category, daily_rate, weekly_rate, monthly_rate, weekend_rate) 
 	VALUES('Autos', 1.12, 1.51, 1.22, 2.11),
