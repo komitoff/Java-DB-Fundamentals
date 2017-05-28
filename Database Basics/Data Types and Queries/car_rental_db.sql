@@ -1,0 +1,63 @@
+CREATE DATABASE car_rental;
+
+DROP DATABASE car_rental;
+
+CREATE TABLE categories (
+	id INT(14) PRIMARY KEY AUTO_INCREMENT,
+	category VARCHAR(250) NOT NULL,
+	daily_rate DECIMAL(10,2) NOT NULL DEFAULT 0,
+	weekly_rate DECIMAL(10,2) NOT NULL DEFAULT 0,
+	monthly_rate DECIMAL(10,2) NOT NULL DEFAULT 0,
+	weekend_rate DECIMAL(10,2) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8; 
+
+CREATE TABLE cars (
+	id INT(14) PRIMARY KEY AUTO_INCREMENT,
+	plate_number VARCHAR(50) NOT NULL,
+	make VARCHAR(100) NOT NULL,
+	model VARCHAR(100) NOT NULL,
+	car_year INT(4) NULL,
+	category_id INT(14),
+	doors INT(1) NULL,
+	picture BLOB,
+	car_condition VARCHAR(250) NULL,
+	available BOOL DEFAULT false
+) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8; 
+
+CREATE TABLE employees (
+	id INT(14) PRIMARY KEY AUTO_INCREMENT,
+	first_name VARCHAR(50) NOT NULL,
+	last_name VARCHAR(50) NOT NULL,
+	title VARCHAR(50) NOT NULL,
+	notes VARCHAR(250) NULL
+)ENGINE=InnoDB DEFAULT CHARACTER SET=utf8; 
+
+CREATE TABLE customers (
+	id INT(14) PRIMARY KEY AUTO_INCREMENT,
+	driver_licence_number INT(14) NOT NULL,
+	full_name VARCHAR(150) NOT NULL,
+	address VARCHAR(150) NOT NULL,
+	ciry VARCHAR(100) NOT NULL,
+	zip_code INT(8) NOT NULL,
+	notes VARCHAR(250) NULL
+)ENGINE=InnoDB DEFAULT CHARACTER SET=utf8; 
+
+CREATE TABLE rental_orders (
+	id INT(14) PRIMARY KEY AUTO_INCREMENT,
+	employee_id INT(14),
+	customer_id INT(14),
+	car_id INT(14),
+	car_condition VARCHAR(250) NULL,
+	tank_level FLOAT(3, 2) NOT NULL,
+	kilometrage_start INT(8) NOT NULL,
+	kilometrage_end INT(8) NOT NULL,
+	total_kilometrage INT(8) NOT NULL,
+	start_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	end_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	total_days INT(4) DEFAULT 0,
+	rates_applied DECIMAL(10, 2) NOT NULL,
+	tax_rate DECIMAL(10, 2) NOT NULL,
+	order_status VARCHAR(10) DEFAULT 'inactive',
+	notes VARCHAR(250) NULL
+) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8; 
+
