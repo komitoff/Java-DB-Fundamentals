@@ -53,6 +53,37 @@ ORDER BY `e`.`salary` DESC,
 	`e`.`last_name` DESC,
 	`e`.`middle_name`;
 	
-#15 NOT FINISHED
-CREATE VIEW `v_employees_salaries` 
+#15
+CREATE VIEW `v_employees_salaries` AS
 	SELECT `e`.`first_name`, `e`.`last_name`, `e`.`salary` FROM `employees` AS `e` ; 
+	
+#16 NOT FINISHED
+CREATE VIEW `v_employees_job_titles` AS
+	SELECT CONCAT(' ', `e`.`first_name`,`e`.`middle_name`, `e`.`last_name`) AS 'full_name' , `e`.`job_title`
+	FROM `employees` AS `e`;
+	
+#17
+SELECT DISTINCT `e`.`job_title` 
+	FROM `employees` AS `e` 
+	ORDER BY `e`.`job_title`;
+	
+#18
+SELECT * FROM `projects` AS `p`
+	ORDER BY 
+		`p`.`start_date`,
+		`p`.`name`
+	LIMIT 10;
+	
+#19
+SELECT `e`.`first_name`, `e`.`last_name`, `e`.`hire_date` 
+	FROM `employees` AS `e`
+	ORDER BY `e`.`hire_date` DESC
+	LIMIT 7;
+	
+#20 (1, 2, 4, 11)
+ALTER TABLE `employees` AS `e`
+	SET `e`.`salary` * 1.12
+	WHERE `e`.`department_id` IN (1, 2, 4, 11);
+	
+SELECT `e`.`salary` 
+	FROM `employees` AS `e`;
