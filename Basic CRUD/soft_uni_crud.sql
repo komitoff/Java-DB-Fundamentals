@@ -85,6 +85,10 @@ ALTER TABLE `employees` AS `e`
 	UPDATE `e`.`salary` = `e`.`salary` * 1.12
 	WHERE `e`.`department_id` IN (1, 2, 4, 11);
 	
-UPDATE `e`.`salary` * 1.12 AS `Salary` 
-	FROM `employees` AS `e`
+UPDATE `employees` AS `e`
+	SET `e`.`salary` = `e`.`salary` * 1.12
 	WHERE `e`.`department_id` IN (1, 2, 4, 11);
+	
+SELECT `e`.`salary` AS `Salary` 
+	FROM `employees` AS `e`;
+	
