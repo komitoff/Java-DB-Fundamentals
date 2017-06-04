@@ -30,7 +30,7 @@ SELECT
 FROM 
 	`employees` AS `e`
 WHERE 
-	`e`.`last_name` NOT REGEXP '[Ee]ngineer';
+	`e`.`job_title` NOT REGEXP '([Ee]ngineer)';
 	
 #5
 SELECT `t`.`name` 
