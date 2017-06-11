@@ -25,12 +25,13 @@ WHERE
 	EXTRACT(year FROM `e`.`hire_date`) BETWEEN 1995 AND 2005;
 	
 #4
+USE soft_uni;
 SELECT 
 	`e`.`first_name`, `e`.`last_name` 
 FROM 
 	`employees` AS `e`
 WHERE 
-	`e`.`job_title` NOT REGEXP '([Ee]ngineer)';
+	`e`.`job_title` LIKE '%engineer%';
 	
 #5
 SELECT `t`.`name` 

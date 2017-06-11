@@ -1,7 +1,8 @@
 #10 NOT FINISHED
-SELECT c.country_name, c.iso_code
+USE geography;
+SELECT c.country_name AS country_name, c.iso_code
 FROM countries AS c
-WHERE c.country_name NOT REGEXP('[Aa]{0,3}')
+WHERE country_name LIKE '%a%a%a%'
 ORDER BY c.iso_code;
 
 #11
