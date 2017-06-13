@@ -59,18 +59,18 @@ SET flights.airline_id = 1
 WHERE flights.status LIKE 'Arrived';
 
 UPDATE tickets AS t
-SET t.price * 2
-WHERE t.ticket_id = (SELECT MAX(al.rating) AS rate
-	FROM tickets AS ti
-	INNER JOIN flights AS fl
-	ON fl.flight_id=ti.flight_id
-	INNER JOIN airlines AS al
-	ON al.airline_id=fl.airline_id;);
+SET t.price = t.price * 2
+WHERE t.flight_id IN (SELECT f.flight_id
+FROM flights AS f
+INNER JOIN airlines AS a
+ON f.airline_id = a.airline_id
+WHERE a.rating = (SELECT MAX(air.rating) FROM airlines AS air));
 
-SELECT ti.ticket_id AS Rate
-	FROM tickets AS ti
-	INNER JOIN flights AS fl
-	ON fl.flight_id=ti.flight_id
-	INNER JOIN airlines AS al
-	ON al.airline_id=fl.airline_id
-	WHERE al.rating = (SELECT MAX(a.rating) FROM airlines AS a);
+SELECT COUNT(*) FROM tickets
+WHERE tickets.price > 3100;
+
+SELECT f.flight_id
+FROM flights AS f
+INNER JOIN airlines AS a
+ON f.airline_id = a.airline_id
+WHERE a.rating = (SELECT MAX(air.rating) FROM airlines AS air);
