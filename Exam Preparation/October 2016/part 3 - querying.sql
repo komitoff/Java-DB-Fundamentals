@@ -41,14 +41,22 @@ ORDER BY t.ticket_id;
 
 #task 6 NOT FINISHED
 SELECT DISTINCT c.customer_id, CONCAT_WS(' ', c.first_name, c.last_name) AS full_name, t.town_name AS home_town
-FROM customers AS c
-INNER JOIN towns AS t
-ON c.home_town_id = t.town_id
-INNER JOIN airports AS a
-ON a.town_id = t.town_id
-INNER JOIN flights AS f
-ON f.destination_airport_id =a.airport_id
-WHERE f.`status` LIKE 'departing'
+	FROM 
+		customers AS c
+	INNER JOIN 
+		towns AS t
+	ON 
+		c.home_town_id = t.town_id
+	INNER JOIN 
+		airports AS a
+	ON 
+		a.town_id = t.town_id
+	INNER JOIN 
+		flights AS f
+	ON 
+		f.destination_airport_id =a.airport_id
+	WHERE 
+		f.`status` LIKE 'departing'
 	AND
 		a.town_id=c.home_town_id;
 
