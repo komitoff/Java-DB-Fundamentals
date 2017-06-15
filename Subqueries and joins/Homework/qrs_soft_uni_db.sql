@@ -57,4 +57,14 @@ ORDER BY
 		p.name
 LIMIT 5;
 
-#8
+#8 not finished
+SELECT e.employee_id, e.first_name, p.name AS project_name 
+FROM employees AS e
+INNER JOIN employees_projects AS ep
+ON ep.employee_id = e.employee_id
+INNER JOIN projects AS p
+ON ep.project_id = p.project_id
+
+#9
+
+
