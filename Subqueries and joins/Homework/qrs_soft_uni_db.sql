@@ -58,7 +58,12 @@ ORDER BY
 LIMIT 5;
 
 #8 not finished
-SELECT e.employee_id, e.first_name, p.name AS project_name 
+SELECT e.employee_id, e.first_name, 
+CASE
+	WHEN date(p.start_date) > '2005/01/01'
+		THEN null
+	ELSE p.name
+	A
 FROM employees AS e
 INNER JOIN employees_projects AS ep
 ON ep.employee_id = e.employee_id
@@ -70,13 +75,15 @@ UPDATE projects AS pr
 	SET pr.start_date = IF(pr.start_date > '2005-31-12', null, pr.name);
 	
 	
-SELECT e.employee_id, e.first_name, p.name AS project_name
+SELECT e.employee_id, e.first_name, p.name
 FROM employees AS e
 INNER JOIN employees_projects AS ep
-ON e.employee_id = ep.employee_id
-INNER JOIN projects AS p
-ON ep.project_id = p.project_id
-WHERE e.employee_id = 24;
+ON e.employee_id = ep.employee_id 
+AND e.employee_id = 24
+LEFT OUTER JOIN projects AS p
+ON ep.project_id = p.project_id 
+AND YEAR(p.start_date) < 2005
+ORDER BY p.name;
   
   
 #9

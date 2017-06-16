@@ -91,10 +91,38 @@ DELIMITER ;
 SELECT e.employee_id, e.first_name, ufn_get_salary_level(e.salary)
 FROM employees AS e;
 
+#6
+DELIMITER $$
+CREATE PROCEDURE usp_get_employees_by_salary_level(salary_level VARCHAR(10))
+BEGIN
+	IF (salary_level LIKE 'Low') THEN
+		SELECT e.first_name, e.last_name
+		FROM employees AS e
+		WHERE e.salary < 30000
+		ORDER BY 
+				e.first_name DESC,
+				e.last_name DESC;
+	ELSEIF (salary_level LIKE 'Average') THEN
+		SELECT e.first_name, e.last_name
+		FROM employees AS e
+		WHERE e.salary >= 30000 
+		  AND e.salary <= 50000
+		ORDER BY 
+				e.first_name DESC,
+				e.last_name DESC;
+	ELSEIF(salary_level like 'High') THEN
+		SELECT e.first_name, e.last_name
+		FROM employees AS e
+		WHERE e.salary > 50000
+		ORDER BY 
+				e.first_name DESC,
+				e.last_name DESC;
+	END IF;
+END $$
+
+DELIMITER ;
+
+CALL usp_get_employees_by_salary_level ('high');
 
 
-
-
-
-
-
+SELECT 'Sofia' LIKE '';
