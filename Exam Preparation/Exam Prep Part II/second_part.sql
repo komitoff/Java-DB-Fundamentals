@@ -54,5 +54,3 @@ ON uc.chat_id = c.id
 INNER JOIN users AS u
 ON u.id = uc.user_id;
 
-#3 - UPDATE
-SELECT DATEDIFF('2014-01-01', '2015-01-01');
