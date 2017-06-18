@@ -83,3 +83,17 @@ FROM wizzard_deposits AS wd
 WHERE wd.deposit_group LIKE 'Troll Chest'
 GROUP BY wd.first_name
 ORDER BY wd.first_name;
+
+
+#18 ***
+use soft_uni;
+
+SELECT em.first_name, em.last_name, em.department_id
+FROM employees AS em
+INNER JOIN (SELECT e.department_id AS department_id, avg(e.salary) AS avg_salary
+							 FROM employees AS e
+							 GROUP BY e.department_id) AS avg_salary_by_dept
+ON em.department_id = avg_salary_by_dept.department_id
+		 WHERE em.salary > avg_salary_by_dept.avg_salary
+ORDER BY em.department_id
+LIMIT 10;

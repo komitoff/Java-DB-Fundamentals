@@ -5,10 +5,10 @@ INSERT INTO
 		CONCAT_WS('-', u.age, u.gender, l.latitude, l.longitude) AS content,
 		'2016-12-15' AS sent_on,
 		CASE 
-			WHEN u.gender LIKE 'f' THEN
-				CEIL(SQRT(u.age * 2))
-			WHEN u.gender LIKE 'm' THEN
-				CEIL(POW(u.age / 18, 3))
+			WHEN u.gender LIKE 'F' THEN
+				FLOOR(SQRT(u.age * 2))
+			WHEN u.gender LIKE 'M' THEN
+				FLOOR(POW(u.age / 18, 3))
 		END AS 'chat_id',
 		u.id AS user_id
 	FROM users AS u
@@ -54,3 +54,10 @@ ON uc.chat_id = c.id
 INNER JOIN users AS u
 ON u.id = uc.user_id;
 
+
+#4 Delete
+DELETE
+FROM locations
+LEFT OUTER JOIN users 
+ON locations.id = users.location_id
+WHERE users.id IS NULL;
