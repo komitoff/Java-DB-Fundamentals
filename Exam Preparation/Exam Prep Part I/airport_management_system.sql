@@ -9,7 +9,7 @@ CREATE TABLE towns(
 CREATE TABLE airports(
 	airport_id INT PRIMARY KEY,
 	airport_name VARCHAR(50) NOT NULL,
-	town_id INT UNIQUE,
+	town_id INT,
 	CONSTRAINT fk_airpots_towns
 	FOREIGN KEY (town_id) REFERENCES towns(town_id)
 );
@@ -17,7 +17,7 @@ CREATE TABLE airports(
 
 CREATE TABLE airlines(
 	airline_id INT PRIMARY KEY,
-	airline_name VARCHAR(50) NOT NULL,
+	airline_name VARCHAR(30) NOT NULL,
 	nationality VARCHAR(30) NOT NULL,
 	rating INT DEFAULT 0
 );
