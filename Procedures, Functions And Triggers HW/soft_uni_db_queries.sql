@@ -125,4 +125,4 @@ DELIMITER ;
 CALL usp_get_employees_by_salary_level ('high');
 
 
-SELECT 'Sofia' LIKE '';
+SELECT LOWER('SofiaQ') REGEXP ('[oistmiahf]+');
