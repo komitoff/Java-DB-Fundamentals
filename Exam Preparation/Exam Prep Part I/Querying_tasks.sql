@@ -89,9 +89,54 @@ ORDER BY
 	c.customer_id;
 	
 #11
+SELECT DISTINCT
+	c.customer_id, 
+	CONCAT_WS(' ', c.first_name, c.last_name) AS 'full_name', 
+	(SELECT 2016 - YEAR(c.date_of_birth)) AS 'age'
+FROM
+	customers AS c
+INNER JOIN 
+	tickets AS t
+ON 
+	t.customer_id=c.customer_id
+INNER JOIN
+	flights AS f
+ON 
+	f.flight_id=t.flight_id	
+AND
+	f.`status` LIKE 'Departing'
+ORDER BY
+	age,
+	c.customer_id;
 
+#12
+SELECT 
+	c.customer_id,
+	CONCAT_WS(' ', c.first_name, c.last_name) AS 'full_name',
+	t.price AS 'ticket_price',
+	a.airport_name AS 'destination'
+FROM 
+	customers AS c
+INNER JOIN
+	tickets as t
+ON
+	t.customer_id=c.customer_id
+INNER JOIN
+	flights AS f
+ON 
+	t.flight_id=f.flight_id
+AND
+	f.`status` LIKE 'Delayed'
+INNER JOIN
+	airports AS a
+ON 
+	f.destination_airport_id=a.airport_id
+ORDER BY
+	ticket_price DESC,
+	c.customer_id
+LIMIT 3;
 
-
+#13
 
 
 	
