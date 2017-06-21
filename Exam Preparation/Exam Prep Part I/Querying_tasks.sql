@@ -155,7 +155,7 @@ ON
 	f.flight_id=t.flight_id	
 AND
 	f.`status` LIKE 'Arrived'
-WHERE 
+HAVING 
 	age < 21
 ORDER BY
 	age DESC,
