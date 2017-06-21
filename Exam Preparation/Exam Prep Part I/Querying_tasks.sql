@@ -136,7 +136,28 @@ ORDER BY
 	c.customer_id
 LIMIT 3;
 
-#13
+#13 ----------------------
 
-
+#14
+SELECT DISTINCT
+	c.customer_id, 
+	CONCAT_WS(' ', c.first_name, c.last_name) AS 'full_name', 
+	(SELECT 2016 - YEAR(c.date_of_birth)) AS 'age'
+FROM
+	customers AS c
+INNER JOIN 
+	tickets AS t
+ON 
+	t.customer_id=c.customer_id
+INNER JOIN
+	flights AS f
+ON 
+	f.flight_id=t.flight_id	
+AND
+	f.`status` LIKE 'Arrived'
+WHERE 
+	age < 21
+ORDER BY
+	age DESC,
+	c.customer_id;
 	
