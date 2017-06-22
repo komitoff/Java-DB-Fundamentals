@@ -48,6 +48,7 @@ BEGIN
 			messages(content, sent_on, chat_id, user_id)
 	VALUES
 			(content, date('2016-12-15'), chat_id, user_id);
+	COMMIT;
 END $$
 DELIMITER ;
 
