@@ -38,8 +38,10 @@ AND
 	date(c.start_date) > date(m.sent_on);
 
 #4 Delete
-DELETE
-FROM locations
-LEFT OUTER JOIN users 
-ON locations.id = users.location_id
-WHERE users.id IS NULL;
+SELECT l.id, l.latitude, l.longitude, u.location_id
+FROM 
+	locations AS l
+LEFT OUTER JOIN
+	users AS u
+ON
+	u.location_id = l.id;
