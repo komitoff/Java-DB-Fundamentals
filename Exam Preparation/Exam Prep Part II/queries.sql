@@ -71,7 +71,7 @@ WHERE
 	l.longitude IS NULL
 ORDER BY u.id;
 
-#12 -----------------------------------
+#12 -------------------
 
 #13 USERS IN BULGARIA
 SELECT u.nickname, c.title, l.latitude, l.longitude
@@ -88,3 +88,15 @@ WHERE
 	l.longitude BETWEEN 22.209999 AND 28.359999
 ORDER BY c.title;
 
+#14 - LAST CHAT  6/10
+SELECT
+	c.title, m.content
+FROM 
+	(SELECT c.id, c.title FROM chats AS c ORDER BY date(c.start_date) DESC LIMIT 1) AS c
+LEFT OUTER JOIN 
+	messages AS m
+ON
+	m.chat_id = c.id
+ORDER BY 
+	m.sent_on DESC,
+	m.id;
