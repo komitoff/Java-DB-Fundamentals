@@ -72,6 +72,28 @@ WHERE
 ORDER BY u.id;
 
 #12 -----------------------------------
+SELECT 
+	m.id,m.chat_id,m.user_id 
+FROM 
+	messages as m
+INNER JOIN 
+	users as u 
+ON 
+	u.id=m.user_id
+INNER JOIN
+	chats as c 
+ON 
+	c.id=m.chat_id 
+WHERE 
+	c.id=17 
+AND NOT
+	u.id in
+		(select users_chats.user_id 
+			from users_chats 
+			where users_chats.chat_id=17 
+			AND users_chats.user_id=u.id)
+ORDER BY
+	m.id DESC;
 
 #13 USERS IN BULGARIA
 SELECT u.nickname, c.title, l.latitude, l.longitude
