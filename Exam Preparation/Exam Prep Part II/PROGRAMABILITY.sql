@@ -36,10 +36,19 @@ WHERE c.password LIKE 'new_pass'
 DELIMITER $$ 
 CREATE PROCEDURE udp_send_message(user_id INT(11), chat_id INT(11), content VARCHAR(200))
 BEGIN
+	START TRANSACTION;
+	IF(user_id NOT IN (SELECT user_id FROM users_chats AS uc WHERE uc.chat_id=chat_id))
+		THEN
+		SIGNAL SQLSTATE '45000'
+		SET MESSAGE_TEXT = 'There is no chat with that user!';
+		ROLLBACK;
+	END IF;
+		
 	INSERT INTO 
 			messages(content, sent_on, chat_id, user_id)
 	VALUES
-			(content, date('2016-12-05'), chat_id, user_id);
+			(content, date('2016-12-15'), chat_id, user_id);
+	COMMIT;
 END $$
 DELIMITER ;
 

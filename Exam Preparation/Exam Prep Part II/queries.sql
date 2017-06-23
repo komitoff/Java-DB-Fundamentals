@@ -71,7 +71,24 @@ WHERE
 	l.longitude IS NULL
 ORDER BY u.id;
 
-#12 -----------------------------------
+#12 -------------------
+SELECT m.id AS 'message_id', c.id AS 'chat_id', u.id AS 'user_id'
+FROM 
+	users AS u
+INNER JOIN 	
+	users_chats AS uc
+ON 
+	uc.user_id=u.id
+INNER JOIN 
+	chats AS c
+ON
+	c.id=uc.chat_id
+AND
+	c.id = 17
+INNER JOIN
+	messages AS m
+ON
+	m.chat_id=c.id;
 SELECT 
 	m.id,m.chat_id,m.user_id 
 FROM 
@@ -95,6 +112,16 @@ AND NOT
 ORDER BY
 	m.id DESC;
 
+
+
+
+
+
+
+
+
+
+
 #13 USERS IN BULGARIA
 SELECT u.nickname, c.title, l.latitude, l.longitude
 FROM users AS u
@@ -110,3 +137,17 @@ WHERE
 	l.longitude BETWEEN 22.209999 AND 28.359999
 ORDER BY c.title;
 
+#14 - LAST CHAT  6/10
+SELECT
+	c.title, m.content
+FROM 
+	(SELECT c.is_active, c.id, c.title FROM chats AS c ORDER BY date(c.start_date) DESC LIMIT 1) AS c
+LEFT OUTER JOIN 
+	messages AS m
+ON
+	m.chat_id = c.id
+WHERE
+	c.is_active=0
+ORDER BY 
+	m.sent_on DESC,
+	m.id;

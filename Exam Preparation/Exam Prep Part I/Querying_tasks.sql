@@ -137,6 +137,40 @@ ORDER BY
 LIMIT 3;
 
 #13 ----------------------
+SELECT f.flight_id, f.departure_time, f.arrival_time, ao.airport_name AS 'origin', ad.airport_name AS 'destination'
+FROM 
+			(SELECT *
+			FROM 
+				flights AS f
+			WHERE 
+				f.`status` LIKE 'Departing'
+			ORDER BY
+				f.departure_time DESC
+			LIMIT 5) AS f
+INNER JOIN
+	airports AS ao
+ON 
+	ao.airport_id=f.origin_airport_id
+INNER JOIN 
+	airports AS ad
+ON
+	ad.airport_id=f.destination_airport_id
+ORDER BY
+	f.departure_time, 
+	f.flight_id
+LIMIT 
+	5;
+
+SELECT
+	f.flight_id, f.departure_time, f.arrival_time
+FROM 
+	flights AS f
+WHERE 
+	f.`status` LIKE 'Departing'
+ORDER BY
+	f.departure_time DESC
+LIMIT 5;
+
 
 #14
 SELECT DISTINCT
@@ -160,4 +194,27 @@ HAVING
 ORDER BY
 	age DESC,
 	c.customer_id;
+	
+	
+#!5 Airports And Passangers
+SELECT a.airport_id, a.airport_name, COUNT(c.customer_id) AS 'passangers'
+FROM 
+	airports AS a
+INNER JOIN 
+	flights AS f
+ON
+	f.origin_airport_id
+AND 
+	f.`status` LIKE 'Departing'
+INNER JOIN 
+	tickets AS t
+ON 
+	t.flight_id = f.flight_id
+INNER JOIN
+	customers AS c
+ON	
+	c.customer_id=t.customer_id
+GROUP BY 
+	a.airport_id;
+
 	
