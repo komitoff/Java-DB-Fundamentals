@@ -17,13 +17,13 @@ VALUES
 	(5,'Bucharest', 5);
 	
 INSERT INTO 
-	minions(minion_id, minion_name, town_id) 
+	minions(minion_id, minion_name, minion_age, town_id) 
 VALUES
-	(1, 'Pesho', 1),
-	(2, 'Lepa Brena', 2),
-	(3, 'Ivan', 3),
-	(4, 'Papadopulis', 4),
-	(5, 'Drakula', 5);
+	(1, 'Pesho', 44, 1),
+	(2, 'Lepa Brena', 12, 2),
+	(3, 'Ivan', 7, 3),
+	(4, 'Papadopulis', 65, 4),
+	(5, 'Drakula', 1, 5);
 	
 INSERT INTO 
 	villains(villain_id, villain_name, evilness_factor)

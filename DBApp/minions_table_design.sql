@@ -3,12 +3,12 @@ DROP DATABASE minions;
 CREATE DATABASE minions;
 
 CREATE TABLE countries (
-	country_id INT PRIMARY KEY,
+	country_id INT PRIMARY KEY AUTO_INCREMENT,
 	country_name VARCHAR(150)
 );
 
 CREATE TABLE towns (
-	town_id INT PRIMARY KEY,
+	town_id INT PRIMARY KEY AUTO_INCREMENT,
 	town_name VARCHAR(100) NOT NULL,
 	country_id INT,
 	CONSTRAINT fk_towns_countries
@@ -16,15 +16,16 @@ CREATE TABLE towns (
 );
 
 CREATE TABLE minions(
-	minion_id INT PRIMARY KEY,
+	minion_id INT PRIMARY KEY AUTO_INCREMENT,
 	minion_name VARCHAR(50) NOT NULL,
+	minion_age INT(3) NOT NULL,
 	town_id INT NOT NULL,
 	CONSTRAINT fk_minions_towns
 	FOREIGN KEY (town_id) REFERENCES towns(town_id)
 );
 
 CREATE TABLE villains (
-	villain_id INT PRIMARY KEY,
+	villain_id INT PRIMARY KEY AUTO_INCREMENT,
 	villain_name VARCHAR(50) NOT NULL,
 	evilness_factor VARCHAR(10) 
 	CHECK( evilness_factor = 'good' OR evilness_factor = 'bad' OR evilness_factor = 'evil' OR evilness_factor = 'super evil')
