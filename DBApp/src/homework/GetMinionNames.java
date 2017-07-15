@@ -4,8 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 
-public class AppConnection {
+public class GetMinionNames {
 
     private static final String URL = "jdbc:mysql://localhost:3306/minions";
 
@@ -14,13 +15,13 @@ public class AppConnection {
     private static final String PASSWORD = "";
 
     public static void main(String[] args) throws SQLException {
+        Scanner scanner = new Scanner(System.in);
+        int minionId = scanner.nextInt();
+
         try(Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
             try(Statement statement = connection.createStatement()) {
-                String sql = "CREATE TABLE countries(\n" +
-                        "\tcountry_id INT PRIMARY KEY,\n" +
-                        "\tcountry_name VARCHAR(150)\n" +
-                        ");";
-                statement.executeUpdate(sql);
+                String sql = "";
+                
             }
         }
     }
