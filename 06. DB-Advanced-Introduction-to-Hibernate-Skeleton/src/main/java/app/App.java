@@ -8,5 +8,7 @@ public class App {
         //RefreshData.run();
         //EmployeesSalary.run();
         //EmployeesFromSeattle.run();
+        //AddingNewAddres.run();
+        DatabaseSearchQueries.run();
     }
 }
