@@ -6,6 +6,7 @@ public class App {
         //RemoveObjects.run();
         //ContainsEmployee.run();
         //RefreshData.run();
-        EmployeesSalary.run();
+        //EmployeesSalary.run();
+        //EmployeesFromSeattle.run();
     }
 }
