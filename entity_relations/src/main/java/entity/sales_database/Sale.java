@@ -1,12 +1,13 @@
 package entity.sales_database;
 
+import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by tobieski on 7/20/2017.
- */
+@Entity
+@Table(name = "sale")
 public class Sale {
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Product product;
@@ -15,5 +16,6 @@ public class Sale {
 
     private StoreLocation storeLocation;
 
+    @Column
     private Date date;
 }

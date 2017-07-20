@@ -1,15 +1,19 @@
 package entity.sales_database;
 
+import javax.persistence.*;
 import java.util.Set;
 
-/**
- * Created by tobieski on 7/20/2017.
- */
+@Entity
+@Table(name = "store_location")
 public class StoreLocation {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String locationName;
 
+    @ManyToOne(targetEntity = Sale.class)
     private Set<Sale> salesInStore;
 }
