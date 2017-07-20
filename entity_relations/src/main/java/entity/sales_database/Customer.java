@@ -17,6 +17,6 @@ public class Customer {
     @Column
     private String creditCardNumber;
 
-    @ManyToOne(targetEntity = Sale.class)
+    @OneToMany(targetEntity = Sale.class)
     private Set<Sale> salesOfCustomer;
 }

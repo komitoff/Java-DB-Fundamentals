@@ -14,6 +14,6 @@ public class StoreLocation {
     @Column
     private String locationName;
 
-    @ManyToOne(targetEntity = Sale.class)
+    @OneToMany(targetEntity = Sale.class)
     private Set<Sale> salesInStore;
 }

@@ -24,6 +24,6 @@ public class Product {
     @Column
     private BigDecimal price;
 
-    @ManyToOne(targetEntity = Sale.class)
+    @OneToMany(targetEntity = Sale.class)
     private Set<Sale> salesOfProduct;
 }

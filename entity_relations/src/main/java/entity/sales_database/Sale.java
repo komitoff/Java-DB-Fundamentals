@@ -7,13 +7,20 @@ import java.util.Date;
 @Table(name = "sale")
 public class Sale {
 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
+    @ManyToOne(targetEntity = Product.class)
     private Product product;
 
+    @Column
+    @ManyToOne(targetEntity = Customer.class)
     private Customer customer;
 
+    @Column
+    @ManyToOne
     private StoreLocation storeLocation;
 
     @Column
