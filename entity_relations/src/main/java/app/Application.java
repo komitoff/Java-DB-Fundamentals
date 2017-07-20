@@ -1,6 +1,6 @@
 package app;
 
-import entity.WizardDeposit;
+import entity.wizard_deposit.WizardDeposit;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

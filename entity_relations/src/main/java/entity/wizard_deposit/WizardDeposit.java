@@ -1,11 +1,6 @@
-package entity;
-
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
+package entity.wizard_deposit;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.Date;
 
 @Entity
