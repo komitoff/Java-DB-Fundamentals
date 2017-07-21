@@ -26,10 +26,10 @@ public class App {
         dumbledore.setDepositAmount(2000.24);
         dumbledore.setDepositCharge(0.2);
         dumbledore.setIsDepositExpired(false);
-//
-//        entityManager.getTransaction().begin();
-//        entityManager.persist(dumbledore);
-//        entityManager.getTransaction().commit();
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(dumbledore);
+        entityManager.getTransaction().commit();
         entityManager.close();
         entityManagerFactory.close();
     }
