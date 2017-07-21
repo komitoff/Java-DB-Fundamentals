@@ -10,14 +10,14 @@ public class Payment {
 
     private Long id;
     private Date paymentDate;
-    private String accountNumber;
+    private Customer accountNumber;
     private Date firstDateOccupied;
     private Date lastDateOccupied;
     private Integer totalDays;
     private BigDecimal amountCharged;
     private BigDecimal taxRate;
     private BigDecimal taxAmount;
-    private BigDecimal payment_total;
+    private BigDecimal paymentTotal;
     private String note;
 
     public Payment () {}
@@ -40,14 +40,18 @@ public class Payment {
         this.paymentDate = paymentDate;
     }
 
-    public String getAccountNumber() {
+    @ManyToOne
+    @JoinColumn(name = "customer_id",
+    referencedColumnName = "account_number")
+    public Customer getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(String accountNumber) {
+    public void setAccountNumber(Customer accountNumber) {
         this.accountNumber = accountNumber;
     }
 
+    @Column(name = "first_date_occupied")
     public Date getFirstDateOccupied() {
         return firstDateOccupied;
     }
@@ -56,6 +60,7 @@ public class Payment {
         this.firstDateOccupied = firstDateOccupied;
     }
 
+    @Column(name = "last_date_occupied")
     public Date getLastDateOccupied() {
         return lastDateOccupied;
     }
@@ -64,6 +69,7 @@ public class Payment {
         this.lastDateOccupied = lastDateOccupied;
     }
 
+    @Column(name = "total_days")
     public Integer getTotalDays() {
         return totalDays;
     }
@@ -72,6 +78,7 @@ public class Payment {
         this.totalDays = totalDays;
     }
 
+    @Column(name = "amount_charged")
     public BigDecimal getAmountCharged() {
         return amountCharged;
     }
@@ -80,6 +87,7 @@ public class Payment {
         this.amountCharged = amountCharged;
     }
 
+    @Column(name = "tax_rate")
     public BigDecimal getTaxRate() {
         return taxRate;
     }
@@ -88,6 +96,7 @@ public class Payment {
         this.taxRate = taxRate;
     }
 
+    @Column(name = "tax_amount")
     public BigDecimal getTaxAmount() {
         return taxAmount;
     }
@@ -96,12 +105,13 @@ public class Payment {
         this.taxAmount = taxAmount;
     }
 
-    public BigDecimal getPayment_total() {
-        return payment_total;
+    @Column(name = "payment_total")
+    public BigDecimal getPaymentTotal() {
+        return paymentTotal;
     }
 
-    public void setPayment_total(BigDecimal payment_total) {
-        this.payment_total = payment_total;
+    public void setPaymentTotal(BigDecimal paymentTotal) {
+        this.paymentTotal = paymentTotal;
     }
 
     public String getNote() {

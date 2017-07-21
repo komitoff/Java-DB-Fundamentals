@@ -24,6 +24,7 @@ public class Employee {
         this.id = id;
     }
 
+    @Column(name = "first_name")
     public String getFirstName() {
         return firstName;
     }
@@ -32,6 +33,7 @@ public class Employee {
         this.firstName = firstName;
     }
 
+    @Column(name = "last_name")
     public String getLastName() {
         return lastName;
     }
@@ -40,6 +42,7 @@ public class Employee {
         this.lastName = lastName;
     }
 
+    @Column(name = "title")
     public String getTitle() {
         return title;
     }

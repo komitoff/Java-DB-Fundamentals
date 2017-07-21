@@ -1,15 +1,15 @@
 package entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "occupancy")
 public class Occupancy {
     private Long id;
     private Date dateOccupied;
-    private String accountNumber;
-    private String roomNumber;
+    private Customer accountNumber;
+    private Room roomNumber;
     private Float rateApplied;
     private String phoneCharge;
     private String note;
@@ -34,22 +34,29 @@ public class Occupancy {
         this.dateOccupied = dateOccupied;
     }
 
-    public String getAccountNumber() {
+    @ManyToOne
+    @JoinColumn(name = "customer_id",
+    referencedColumnName = "account_number")
+    public Customer getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(String accountNumber) {
+    public void setAccountNumber(Customer accountNumber) {
         this.accountNumber = accountNumber;
     }
 
-    public String getRoomNumber() {
+    @ManyToOne
+    @JoinColumn(name = "occupancy_id",
+    referencedColumnName = "room_number")
+    public Room getRoomNumber() {
         return roomNumber;
     }
 
-    public void setRoomNumber(String roomNumber) {
+    public void setRoomNumber(Room roomNumber) {
         this.roomNumber = roomNumber;
     }
 
+    @Column(name = "rate_applied")
     public Float getRateApplied() {
         return rateApplied;
     }
@@ -58,6 +65,7 @@ public class Occupancy {
         this.rateApplied = rateApplied;
     }
 
+    @Column(name = "phone_charge")
     public String getPhoneCharge() {
         return phoneCharge;
     }

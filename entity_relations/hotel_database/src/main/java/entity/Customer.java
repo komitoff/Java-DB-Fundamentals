@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "customer")
@@ -12,11 +13,13 @@ public class Customer {
     private String phoneNumber;
     private String emergencyName;
     private String emergencyNumber;
-    private String name;
+    private Set<Payment> payments;
+    private Set<Occupancy> occupancies;
 
     public Customer () {  }
 
     @Id
+    @Column(name = "account_number")
     public String getAccountNumber() {
         return accountNumber;
     }
@@ -25,6 +28,7 @@ public class Customer {
         this.accountNumber = accountNumber;
     }
 
+    @Column(name = "first_name")
     public String getFirstName() {
         return firstName;
     }
@@ -33,6 +37,7 @@ public class Customer {
         this.firstName = firstName;
     }
 
+    @Column(name = "last_name")
     public String getLastName() {
         return lastName;
     }
@@ -41,6 +46,7 @@ public class Customer {
         this.lastName = lastName;
     }
 
+    @Column(name = "phone_number")
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -49,6 +55,7 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
+    @Column(name = "emergency_name")
     public String getEmergencyName() {
         return emergencyName;
     }
@@ -57,6 +64,7 @@ public class Customer {
         this.emergencyName = emergencyName;
     }
 
+    @Column(name = "emergency_number")
     public String getEmergencyNumber() {
         return emergencyNumber;
     }
@@ -65,11 +73,21 @@ public class Customer {
         this.emergencyNumber = emergencyNumber;
     }
 
-    public String getName() {
-        return name;
+    @OneToMany(mappedBy = "accountNumber")
+    public Set<Payment> getPayments() {
+        return payments;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPayments(Set<Payment> payments) {
+        this.payments = payments;
+    }
+
+    @OneToMany(mappedBy = "accountNumber")
+    public Set<Occupancy> getOccupancies() {
+        return occupancies;
+    }
+
+    public void setOccupancies(Set<Occupancy> occupancies) {
+        this.occupancies = occupancies;
     }
 }

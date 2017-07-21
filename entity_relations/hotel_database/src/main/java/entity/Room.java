@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "room")
@@ -11,6 +12,7 @@ public class Room {
     private RoomStatus roomStatus;
     private Float rate;
     private String note;
+    private Set<Occupancy> occupancies;
 
     public Room () { }
 
@@ -68,5 +70,14 @@ public class Room {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    @OneToMany(mappedBy = "roomNumber")
+    public Set<Occupancy> getOccupancies() {
+        return occupancies;
+    }
+
+    public void setOccupancies(Set<Occupancy> occupancies) {
+        this.occupancies = occupancies;
     }
 }
