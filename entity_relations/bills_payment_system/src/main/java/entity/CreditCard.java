@@ -1,18 +1,42 @@
 package entity;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.util.Date;
 
 @Entity
-@Table(name = "credit_card")
-public class CreditCard extends BillingDetail {
+@DiscriminatorValue(value = "credit_card")
+public class CreditCard extends BasicBillingDetails{
+    private String cardType;
+    private String expirationMonth;
+    private Integer expirationYear;
 
-    public static final String CARD_TYPE = "Credit Card";
+    public CreditCard() {}
 
-    public static final String EXPIRATION_DATE = "12/12";
+    @Column(name = "card_type")
+    public String getCardType() {
+        return cardType;
+    }
 
-    public static final String EXPIRATION_YEAR = "2017";
+    public void setCardType(String cardType) {
+        this.cardType = cardType;
+    }
 
+    @Column(name = "expiration_month")
+    public String getExpirationMonth() {
+        return expirationMonth;
+    }
 
+    public void setExpirationMonth(String expirationMonth) {
+        this.expirationMonth = expirationMonth;
+    }
+
+    @Column(name = "expiration_year")
+    public Integer getExpirationYear() {
+        return expirationYear;
+    }
+
+    public void setExpirationYear(Integer expirationYear) {
+        this.expirationYear = expirationYear;
+    }
 }

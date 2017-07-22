@@ -1,15 +1,32 @@
 package entity;
 
-import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-@DiscriminatorValue(value = "Unicredit")
-public class BankAccount extends BillingDetail {
+@DiscriminatorValue(value = "bank_account")
+public class BankAccount extends BasicBillingDetails {
+    private String swiftCode;
+    private String bankName;
 
-    public static final String BANK_NAME = "UniCredit";
+    public BankAccount() {}
 
-    public static final String SWIFT_CODE = "asjdiqjw1123";
+    @Column(name = "swift_code")
+    public String getSwiftCode() {
+        return swiftCode;
+    }
+
+    public void setSwiftCode(String swiftCode) {
+        this.swiftCode = swiftCode;
+    }
+
+    @Column(name = "bank_name")
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
 }
