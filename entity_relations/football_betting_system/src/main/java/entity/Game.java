@@ -2,6 +2,7 @@ package entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "game")
@@ -17,6 +18,8 @@ public class Game {
     private Double drawGameBetRate;
     private Round round;
     private Competition competition;
+    private Set<ResultPrediction> resultPredictions;
+    private Set<Bet> bets;
 
     public Game() {}
 
@@ -126,5 +129,33 @@ public class Game {
 
     public void setCompetition(Competition competition) {
         this.competition = competition;
+    }
+
+    @ManyToMany
+    @JoinTable(name = "bet_games",
+    joinColumns = @JoinColumn(name = "game_id",
+    referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "result_prediction_id",
+    referencedColumnName = "id"))
+    public Set<ResultPrediction> getResultPredictions() {
+        return resultPredictions;
+    }
+
+    public void setResultPredictions(Set<ResultPrediction> resultPredictions) {
+        this.resultPredictions = resultPredictions;
+    }
+
+    @ManyToMany
+    @JoinTable(name = "bet_games",
+    joinColumns = @JoinColumn(name = "game_id",
+    referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "bet_id",
+    referencedColumnName = "id"))
+    public Set<Bet> getBets() {
+        return bets;
+    }
+
+    public void setBets(Set<Bet> bets) {
+        this.bets = bets;
     }
 }
