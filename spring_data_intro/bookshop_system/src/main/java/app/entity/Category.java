@@ -11,6 +11,10 @@ public class Category implements Serializable {
 
     public Category() {}
 
+    public Category(String name) {
+        this.name = name;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
