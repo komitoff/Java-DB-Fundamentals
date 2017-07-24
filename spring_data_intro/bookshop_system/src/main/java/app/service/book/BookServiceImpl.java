@@ -6,6 +6,9 @@ import app.service.book.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.List;
+
 @Service
 public class BookServiceImpl implements BookService {
 
@@ -16,4 +19,10 @@ public class BookServiceImpl implements BookService {
     public void save(Book book) {
         bookRepository.save(book);
     }
+
+    @Override
+    public List<Book> getAllBooksAfterYear(Date date) {
+        return this.bookRepository.findByReleaseDateAfter(date);
+    }
+
 }

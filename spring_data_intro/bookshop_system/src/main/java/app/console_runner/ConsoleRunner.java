@@ -35,11 +35,24 @@ public class ConsoleRunner implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-        try {
-           seedData(); 
-        } catch (IOException ioe) {
-            System.out.println(ioe.getMessage());
-        }
+        /** task 1 and 2 **/
+//     Remove the comments from this piece of code to seed data into database
+//     Also change the spring.jpa.hibernate.ddl-auto = create into application.properties file
+//        try {
+//           seedData();
+//        } catch (IOException ioe) {
+//            System.out.println(ioe.getMessage());
+//        }
+
+        //task 3
+/*        Calendar cal = Calendar.getInstance();
+        cal.set(2000, 1, 1);
+        Date date = cal.getTime();
+
+        List<Book> booksAfter2000 = bookService.getAllBooksAfterYear(date);
+        booksAfter2000.forEach(x -> System.out.println(x.getTitle()));*/
+
+
     }
 
     public void seedData() throws IOException, ParseException {
