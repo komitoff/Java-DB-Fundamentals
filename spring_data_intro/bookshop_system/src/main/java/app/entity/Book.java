@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "book")
@@ -19,7 +20,7 @@ public class Book implements Serializable{
     private Date releaseDate;
     private String ageRestriction;
     private Author author;
-    private Category category;
+    private Set<Category> category;
 
     public Book() {}
 
@@ -117,17 +118,17 @@ public class Book implements Serializable{
         this.author = author;
     }
 
-    @ManyToOne
+    @ManyToMany
     @JoinTable(name = "books_categories",
     joinColumns = @JoinColumn(name = "book_id",
     referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "category_id",
     referencedColumnName = "id"))
-    public Category getCategory() {
+    public Set<Category> getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(Set<Category> category) {
         this.category = category;
     }
 }

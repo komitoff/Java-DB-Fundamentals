@@ -3,6 +3,8 @@ package app.console_runner;
 import app.entity.Author;
 import app.entity.Book;
 import app.entity.Category;
+import app.repository.AuthorRepository;
+import app.repository.BookRepository;
 import app.service.author.AuthorService;
 import app.service.book.BookService;
 import app.service.category.CategoryService;
@@ -13,12 +15,11 @@ import org.springframework.stereotype.Component;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Component
 public class ConsoleRunner implements CommandLineRunner {
@@ -34,6 +35,14 @@ public class ConsoleRunner implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
+        try {
+           seedData(); 
+        } catch (IOException ioe) {
+            System.out.println(ioe.getMessage());
+        }
+    }
+
+    public void seedData() throws IOException, ParseException {
         Random random = new Random();
         List<Author> authors = new ArrayList<>();
         List<Category> categories = new ArrayList<>();
@@ -43,7 +52,6 @@ public class ConsoleRunner implements CommandLineRunner {
         while ((authorLine = authorReader.readLine()) != null) {
             String[] data = authorLine.split("\\s+");
             Author author = new Author(data[0], data[1]);
-            authors.add(new Author(data[0], data[1]));
             authorService.save(author);
         }
         authorReader.close();
@@ -61,9 +69,9 @@ public class ConsoleRunner implements CommandLineRunner {
 
         BufferedReader booksReader = new BufferedReader(new FileReader("books.txt"));
         String line = booksReader.readLine();
-        while ((line = booksReader.readLine()) != null) {
+        while((line = booksReader.readLine()) != null){
             String[] data = line.split("\\s+");
-
+            authors = authorService.findAll();
             int authorIndex = random.nextInt(authors.size());
             Author author = authors.get(authorIndex);
             String editionType = data[0];
@@ -87,13 +95,12 @@ public class ConsoleRunner implements CommandLineRunner {
             book.setPrice(price);
             book.setAgeRestriction(ageRestriction);
             book.setTitle(title);
+            Set<Category> categorySet = new HashSet<>();
+            categorySet.add(categories.get(random.nextInt(categories.size())));
+            book.setCategory(categorySet);
             //TODO add random categories for current book
-            int categoryIndex = random.nextInt(categories.size());
-            book.setCategory(categories.get(categoryIndex));
 
             bookService.save(book);
-
-            System.out.println("hello runner");
         }
     }
 }
