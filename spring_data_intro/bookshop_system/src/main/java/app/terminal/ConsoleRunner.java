@@ -1,10 +1,9 @@
-package app.console_runner;
+package app.terminal;
 
 import app.entity.Author;
 import app.entity.Book;
 import app.entity.Category;
 import app.repository.AuthorRepository;
-import app.repository.BookRepository;
 import app.service.author.AuthorService;
 import app.service.book.BookService;
 import app.service.category.CategoryService;
@@ -13,7 +12,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -32,6 +30,9 @@ public class ConsoleRunner implements CommandLineRunner {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private AuthorRepository authorRepository;
 
     @Override
     public void run(String... strings) throws Exception {
@@ -52,7 +53,10 @@ public class ConsoleRunner implements CommandLineRunner {
         List<Book> booksAfter2000 = bookService.getAllBooksAfterYear(date);
         booksAfter2000.forEach(x -> System.out.println(x.getTitle()));*/
 
-
+        Calendar cal = Calendar.getInstance();
+        cal.set(1990, 1, 1);
+        Date date = cal.getTime();
+        List<Author> authors = authorRepository.findAllWithBookReleaseDateBefore(date);
     }
 
     public void seedData() throws IOException, ParseException {

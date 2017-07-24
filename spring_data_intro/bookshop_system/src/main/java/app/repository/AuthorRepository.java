@@ -22,10 +22,10 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
 //    GROUP BY
 //    a.id;
 
-    @Query(value = "SELECT a.firstName, a.lastName, COUNT(b.id) " +
-            "FROM Author a INNER JOIN Book b " +
+    @Query(value = "SELECT a.first_name, a.last_name, COUNT(*) as booksCount " +
+            "FROM Author a INNER JOIN Book b ON a.id = b.author_id " +
             "WHERE b.release_date < ?1 " +
-            "GROUP BY a.id",
+            "GROUP BY a.id;",
             nativeQuery = true)
     List<Author> findAllWithBookReleaseDateBefore(Date releaseDate);
 }
