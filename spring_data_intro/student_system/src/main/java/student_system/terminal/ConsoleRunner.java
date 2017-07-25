@@ -9,4 +9,8 @@ public class ConsoleRunner implements CommandLineRunner {
     public void run(String... strings) throws Exception {
 
     }
+
+    public static void seedData() {
+
+    }
 }

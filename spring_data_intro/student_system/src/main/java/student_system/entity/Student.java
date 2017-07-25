@@ -13,6 +13,7 @@ public class Student {
     private Date registrationDate;
     private Date birthday;
     private Set<Course> courses;
+    private Set<Homework> homeworkSubmissions;
 
     public Student() {}
 
@@ -77,5 +78,14 @@ public class Student {
 
     public void setCourses(Set<Course> courses) {
         this.courses = courses;
+    }
+
+    @OneToMany(mappedBy = "student")
+    public Set<Homework> getHomeworkSubmissions() {
+        return homeworkSubmissions;
+    }
+
+    public void setHomeworkSubmissions(Set<Homework> homeworkSubmissions) {
+        this.homeworkSubmissions = homeworkSubmissions;
     }
 }
