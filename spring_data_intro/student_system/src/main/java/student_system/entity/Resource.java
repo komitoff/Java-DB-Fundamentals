@@ -61,4 +61,15 @@ public class Resource {
     public void setCourse(Course course) {
         this.course = course;
     }
+
+    @Override
+    public String toString() {
+        return "Resource{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", resourceType=" + resourceType +
+                ", url='" + url + '\'' +
+                ", course=" + course +
+                '}';
+    }
 }

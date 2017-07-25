@@ -75,4 +75,15 @@ public class Homework {
     public void setCourses(Course courses) {
         this.courses = courses;
     }
+
+    @Override
+    public String toString() {
+        return "Homework{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", contentType=" + contentType +
+                ", submissionDate=" + submissionDate +
+                ", student=" + student +
+                '}';
+    }
 }

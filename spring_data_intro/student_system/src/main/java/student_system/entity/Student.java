@@ -88,4 +88,15 @@ public class Student {
     public void setHomeworkSubmissions(Set<Homework> homeworkSubmissions) {
         this.homeworkSubmissions = homeworkSubmissions;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", registrationDate=" + registrationDate +
+                ", birthday=" + birthday +
+                '}';
+    }
 }
