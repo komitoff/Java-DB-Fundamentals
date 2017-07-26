@@ -8,4 +8,5 @@ public interface UserService {
     List<User> getAll();
     User findOne(long id);
     void persist(User user);
+    List<User> findByEmailProvider(String provider);
 }

@@ -1,8 +1,11 @@
 package application.entity;
 
+import org.hibernate.annotations.FetchProfile;
+
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -16,6 +19,7 @@ public class User {
     private Date lastTimeLoggedIn;
     private Integer age;
     private Boolean isDeleted;
+    private Set<User> friends;
 
     public User() {}
 
@@ -72,11 +76,11 @@ public class User {
     }
 
     @Column(name = "email")
-    public String getEmial() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmial(String email) {
+    public void setEmail(String email) {
 
         if (!email.matches("[a-zA-Z0-9].*@[a-zA-Z0-9].*\\.[a-zA-Z].*")) {
             throw new IllegalArgumentException("Invalid email address");
@@ -90,9 +94,9 @@ public class User {
     }
 
     public void setProfilePicture(Byte[] profilePicture) {
-        if (profilePicture.length > 1024 * 1024) {
-            throw new IllegalArgumentException("Size of the picture is bigger than allowed");
-        }
+//        if (profilePicture.length > 1024 * 1024) {
+//            throw new IllegalArgumentException("Size of the picture is bigger than allowed");
+//        }
         this.profilePicture = profilePicture;
     }
 
@@ -130,6 +134,18 @@ public class User {
 
     public void setDeleted(Boolean deleted) {
         isDeleted = deleted;
+    }
+
+    @OneToMany
+    @JoinColumn(name = "friend_id",
+    referencedColumnName = "id",
+    foreignKey = @ForeignKey(name = "FK_user_friends"))
+    public Set<User> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(Set<User> friends) {
+        this.friends = friends;
     }
 
     @Override

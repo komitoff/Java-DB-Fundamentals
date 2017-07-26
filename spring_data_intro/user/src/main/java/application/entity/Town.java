@@ -35,7 +35,8 @@ public class Town {
 
     @OneToMany
     @JoinColumn(name = "user_id",
-    referencedColumnName = "id")
+    referencedColumnName = "id",
+    foreignKey = @ForeignKey(name = "FK_users_towns"))
     public List<User> getUsers() {
         return users;
     }

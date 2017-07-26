@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class Terminal implements CommandLineRunner {
@@ -17,7 +18,12 @@ public class Terminal implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-        seedUser();
+//        seedUser();
+        List<User> abvUsers = userService.findByEmailProvider("abv.bg");
+        abvUsers
+                .stream()
+                .forEach(x -> System.out.println(x.getUsername() + " -> " + x.getEmail()));
+        System.out.println("size: " + abvUsers.size());
     }
 
     public void seedUser() {
@@ -25,7 +31,7 @@ public class Terminal implements CommandLineRunner {
         user.setUsername("username");
         user.setAge(21);
         user.setDeleted(false);
-        user.setEmial("user@abv.bg");
+        user.setEmail("user@abv.bg");
         Calendar calendar = Calendar.getInstance();
         calendar.set(1991, 12, 19);
         Date lastLogged = calendar.getTime();

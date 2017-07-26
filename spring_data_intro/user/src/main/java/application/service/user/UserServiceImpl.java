@@ -27,4 +27,9 @@ public class UserServiceImpl implements UserService {
     public void persist(User user) {
         this.userRepository.saveAndFlush(user);
     }
+
+    @Override
+    public List<User> findByEmailProvider(String provider) {
+        return this.userRepository.findByEmail(provider);
+    }
 }
