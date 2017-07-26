@@ -21,6 +21,7 @@ public class Book implements Serializable{
     private String ageRestriction;
     private Author author;
     private Set<Category> category;
+    private Set<Book> relatedBooks;
 
     public Book() {}
 
@@ -130,5 +131,19 @@ public class Book implements Serializable{
 
     public void setCategory(Set<Category> category) {
         this.category = category;
+    }
+
+    @ManyToMany
+    @JoinTable(name = "related_books",
+    joinColumns = @JoinColumn(name = "book_id",
+    referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "related_id",
+    referencedColumnName = "id"))
+    public Set<Book> getRelatedBooks() {
+        return relatedBooks;
+    }
+
+    public void setRelatedBooks(Set<Book> relatedBooks) {
+        this.relatedBooks = relatedBooks;
     }
 }

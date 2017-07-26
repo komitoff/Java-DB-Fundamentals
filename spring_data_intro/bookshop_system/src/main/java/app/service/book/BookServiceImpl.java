@@ -25,4 +25,9 @@ public class BookServiceImpl implements BookService {
         return this.bookRepository.findByReleaseDateAfter(date);
     }
 
+    @Override
+    public List<Book> findBooks() {
+        return this.bookRepository.findAll();
+    }
+
 }

@@ -8,4 +8,5 @@ import java.util.List;
 public interface BookService {
     void save(Book book);
     List<Book> getAllBooksAfterYear(Date date);
+    List<Book> findBooks();
 }

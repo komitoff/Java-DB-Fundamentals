@@ -53,10 +53,36 @@ public class ConsoleRunner implements CommandLineRunner {
         List<Book> booksAfter2000 = bookService.getAllBooksAfterYear(date);
         booksAfter2000.forEach(x -> System.out.println(x.getTitle()));*/
 
-        Calendar cal = Calendar.getInstance();
-        cal.set(1990, 1, 1);
-        Date date = cal.getTime();
-        List<Author> authors = authorRepository.findAllWithBookReleaseDateBefore(date);
+//        Calendar cal = Calendar.getInstance();
+//        cal.set(1990, 1, 1);
+//        Date date = cal.getTime();
+//        List<Author> authors = authorRepository.findAllWithBookReleaseDateBefore(date);
+
+        addRelatedBooks();
+
+    }
+
+    public void addRelatedBooks() {
+        List<Book> books = (List<Book>) bookService.findBooks();
+        List<Book> threeBooks = books.subList(0, 3);
+
+        threeBooks.get(0).getRelatedBooks().add(threeBooks.get(1));
+        threeBooks.get(1).getRelatedBooks().add(threeBooks.get(0));
+        threeBooks.get(0).getRelatedBooks().add(threeBooks.get(2));
+        threeBooks.get(2).getRelatedBooks().add(threeBooks.get(0));
+
+        //save related books to the database
+        for (Book book : threeBooks) {
+            bookService.save(book);
+        }
+
+        for (Book book : threeBooks) {
+            System.out.printf("--%s\n", book.getTitle());
+            for (Book relatedBook : book.getRelatedBooks()) {
+                System.out.println(relatedBook.getTitle());
+            }
+        }
+        System.out.println("Related books added successfully");
     }
 
     public void seedData() throws IOException, ParseException {
