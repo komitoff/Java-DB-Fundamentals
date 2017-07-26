@@ -18,7 +18,7 @@ public class Terminal implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-//        seedUser();
+        seedUser();
         List<User> abvUsers = userService.findByEmailProvider("abv.bg");
         abvUsers
                 .stream()

@@ -1,5 +1,7 @@
 package application.entity;
 
+import application.validator.Email;
+import application.validator.Password;
 import org.hibernate.annotations.FetchProfile;
 
 import javax.persistence.*;
@@ -46,45 +48,25 @@ public class User {
     }
 
     @Column(name = "password")
+    @Password(containsDigit = true,
+            containsLowerCase = true,
+            containsSpecialCharacter = true,
+            containsUpperCase = true)
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
-        if (password.length() < 6 || password.length() > 50) {
-            throw new IllegalArgumentException("Password must be between 6 and 50 symbols");
-        }
-
-        if (!password.matches(".*[a-z].*")) {
-            throw new IllegalArgumentException("Password must contains at least one small letter");
-        }
-
-        if (!password.matches(".*[A-Z].*")) {
-            throw new IllegalArgumentException("Password must contains at least one big letter");
-        }
-
-        if (!password.matches(".*[0-9].*")) {
-            throw new IllegalArgumentException("Password must contains at least one digit");
-        }
-
-        if (!password.matches(".*[!, @, #, $, %, ^, &, *, (, ), _, +, <, >, ?].*")) {
-            throw new IllegalArgumentException("Password must contains at least one special character");
-        }
-
         this.password = password;
-
     }
 
     @Column(name = "email")
+    @org.hibernate.validator.constraints.Email
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
-
-        if (!email.matches("[a-zA-Z0-9].*@[a-zA-Z0-9].*\\.[a-zA-Z].*")) {
-            throw new IllegalArgumentException("Invalid email address");
-        }
         this.email = email;
     }
 
