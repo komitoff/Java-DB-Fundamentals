@@ -1,7 +1,7 @@
 package app;
 
-import app.dao.api.CategoriesDao;
 import app.entities.*;
+import app.repository.api.BookRepository;
 import app.service.api.AuthorService;
 import app.service.api.BookService;
 import app.service.api.CategoryService;
@@ -10,9 +10,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,27 +30,39 @@ public class ConsoleRunner implements CommandLineRunner {
     @Autowired
     private CategoryService<Category, Long> categoryService;
 
+
     public void run(String... strings) throws Exception {
         //Problem 2. Seed Data into the Database
 //        seedDatabase();
+//        relatedBooks();
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        // Problem 3. Execute queries
-        // 3.1 Books after the year 2000
-//        getBooksAfter2000();
+        //1 Find by age restriction
+//        String ageRestrictionType = reader.readLine();
+//        booksByAgeRestriction(ageRestrictionType);
 
-        // 3.2 	Get all authors with at least one book with release date before 1990. Print their first name and last name.
-//        getBooksBefore1990();
+        //2 Golden Edition
+//        String goldenType = "GOLD";
+//        EditionType editionType = EditionType.valueOf(goldenType.toUpperCase());
+//        List<Book> goldenEdition =
+//                bookService.findAllByEditionType(editionType);
+        //goldenEdition.stream().forEach(b -> System.out.println(b.getTitle()));
 
-        // 3.3.	Get all authors, ordered by the number of their books (descending). Print their first name, last name and book count.
-//        getAuthorsOrdered();
+        //3 Find by price
+//        List<Book> booksByPrice = bookService.findByPrice();
+//        booksByPrice.stream().forEach(b -> System.out.println(
+//                String.format("%s - %f $", b.getTitle(), b.getPrice())
+//        ));
 
-        // 3.4.	Get all books from author George Powell, ordered by their release date (descending), then by book title (ascending). Print the book's title, release date and copies.
-//        getBooksFromAuthor();
-
-        //4. Related books
-        relatedBooks();
+        //4
 
 
+    }
+
+    private void booksByAgeRestriction(String ageRestrictionType) {
+        AgeRestriction ageRestriction = AgeRestriction.valueOf(ageRestrictionType.toUpperCase());
+        List<Book> booksByAgeRestriction = this.bookService.findAllByAgeRestriction(ageRestriction);
+        booksByAgeRestriction.stream().forEach(x -> System.out.println(x.getTitle()));
     }
 
     private void relatedBooks() {

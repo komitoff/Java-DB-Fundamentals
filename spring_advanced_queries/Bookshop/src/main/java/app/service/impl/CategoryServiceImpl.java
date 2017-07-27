@@ -1,6 +1,6 @@
 package app.service.impl;
 
-import app.dao.api.CategoriesDao;
+import app.repository.api.CategoryRepository;
 import app.entities.Category;
 import app.service.api.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 public class CategoryServiceImpl implements CategoryService<Category, Long> {
 
     @Autowired
-    private CategoriesDao categoriesDao;
+    private CategoryRepository categoryRepository;
 
     @Override
     public void save(Category category) {
-        categoriesDao.save(category);
+        categoryRepository.save(category);
     }
 
     @Override
     public Category findByName(String name) {
-        return categoriesDao.findByName(name);
+        return categoryRepository.findByName(name);
     }
 }

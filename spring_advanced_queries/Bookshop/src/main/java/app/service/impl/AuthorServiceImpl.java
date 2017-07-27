@@ -1,6 +1,6 @@
 package app.service.impl;
 
-import app.dao.api.AuthorsDao;
+import app.repository.api.AuthorRepository;
 import app.entities.Author;
 import app.service.api.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,27 +14,27 @@ import java.util.List;
 public class AuthorServiceImpl implements AuthorService<Author, Long>{
 
     @Autowired
-    private AuthorsDao authorsDao;
+    private AuthorRepository authorRepository;
 
 
     @Override
     public void delete(Long id) {
-        authorsDao.delete(id);
+        authorRepository.delete(id);
     }
 
     @Override
     public Author findAuhor(Long id) {
-        return authorsDao.findOne(id);
+        return authorRepository.findOne(id);
     }
 
     @Override
     public List<Author> findAll() {
-        return authorsDao.findAll();
+        return authorRepository.findAll();
     }
 
     @Override
     public void save(Author author) {
-        authorsDao.save(author);
+        authorRepository.save(author);
     }
 
     @Override
@@ -44,12 +44,12 @@ public class AuthorServiceImpl implements AuthorService<Author, Long>{
 
     @Override
     public List<Author> findAuthorsWithBookReleasedBefore1990() {
-        return authorsDao.findAuthorsWithBookReleasedBefore1990();
+        return authorRepository.findAuthorsWithBookReleasedBefore1990();
     }
 
     @Override
     public List<Object[]> findAuthorByBooksCount(){
-        return authorsDao.findAuthorByBooksCount();
+        return authorRepository.findAuthorByBooksCount();
     }
 
 

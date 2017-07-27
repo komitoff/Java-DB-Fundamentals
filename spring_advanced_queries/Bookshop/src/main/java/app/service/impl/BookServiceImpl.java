@@ -1,6 +1,8 @@
 package app.service.impl;
 
-import app.dao.api.BooksDao;
+import app.entities.AgeRestriction;
+import app.entities.EditionType;
+import app.repository.api.BookRepository;
 import app.entities.Book;
 import app.service.api.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,21 +17,21 @@ import java.util.List;
 public class BookServiceImpl implements BookService<Book, Long> {
 
     @Autowired
-    private BooksDao booksDao;
+    private BookRepository bookRepository;
 
     @Override
     public List<Book> findAll() {
-        return booksDao.findAll();
+        return bookRepository.findAll();
     }
 
     @Override
     public void save(Book book) {
-        booksDao.save(book);
+        bookRepository.save(book);
     }
 
     @Override
     public Book findBookByTitle(String title) {
-        return booksDao.findByTitle(title);
+        return bookRepository.findByTitle(title);
     }
 
     @Override
@@ -39,18 +41,26 @@ public class BookServiceImpl implements BookService<Book, Long> {
 
     @Override
     public List<Book> findByReleaseDateAfter(Date date) {
-        return booksDao.findAllByReleaseDateAfter(date);
+        return bookRepository.findAllByReleaseDateAfter(date);
     }
 
     @Override
     public List<Book> getBooksByAuthorFirstNameAndAuthorLastNameOrderByReleaseDateDescTitleAsc(String firstName, String lastName) {
-        return booksDao.getBooksByAuthorFirstNameAndAuthorLastNameOrderByReleaseDateDescTitleAsc(firstName, lastName);
+        return bookRepository.getBooksByAuthorFirstNameAndAuthorLastNameOrderByReleaseDateDescTitleAsc(firstName, lastName);
     }
 
     @Override
     public List<Book> getBooksByReleaseDateBefore(Date date) {
-        return booksDao.getBooksByReleaseDateBefore(date);
+        return bookRepository.getBooksByReleaseDateBefore(date);
     }
 
+    @Override
+    public List<Book> findAllByAgeRestriction(AgeRestriction ageRestriction) {
+        return this.bookRepository.findAllByAgeRestriction(ageRestriction);
+    }
 
+    @Override
+    public List<Book> findByPrice() {
+        return this.bookRepository.findAllByPrice();
+    }
 }
