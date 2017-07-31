@@ -3,12 +3,14 @@ package app.service.api;
 
 import app.entities.AgeRestriction;
 import app.entities.Book;
+import app.entities.Category;
 import app.entities.EditionType;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-public interface BookService<Book, Long> {
+public interface BookService {
     List<Book> findAll ();
 
     void save(Book book);
@@ -26,4 +28,10 @@ public interface BookService<Book, Long> {
     List<Book> findAllByAgeRestriction(AgeRestriction ageRestriction);
 
     List<Book> findByPrice();
+
+   // List<String> getGoldenBooks(int editionType);
+
+    List<String> getNotReleasedBooks(int year);
+
+    List<String> getAllByCategories(List<String> categories);
 }

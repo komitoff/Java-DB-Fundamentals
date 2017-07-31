@@ -1,6 +1,8 @@
 package app.service.api;
 
-public interface CategoryService<Category, Long> {
+import app.entities.Category;
+
+public interface CategoryService {
 
     void save(Category category);
 

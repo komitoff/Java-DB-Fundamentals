@@ -5,7 +5,7 @@ import app.entities.Book;
 import java.util.Date;
 import java.util.List;
 
-public interface AuthorService<Author, Long> {
+public interface AuthorService{
 
     void delete(Long id);
 
@@ -20,6 +20,4 @@ public interface AuthorService<Author, Long> {
     List<Author> findAuthorsWithBookReleasedBefore1990();
 
     List<Object[]> findAuthorByBooksCount();
-
-
 }

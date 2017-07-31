@@ -16,47 +16,54 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 
 @Component
 public class ConsoleRunner implements CommandLineRunner {
 
     @Autowired
-    private BookService<Book, Long> bookService;
+    private BookService bookService;
 
     @Autowired
-    private AuthorService<Author, Long> authorService;
+    private AuthorService authorService;
 
     @Autowired
-    private CategoryService<Category, Long> categoryService;
+    private CategoryService categoryService;
+
+    private final Scanner scanner = new Scanner(System.in);
 
 
     public void run(String... strings) throws Exception {
-        //Problem 2. Seed Data into the Database
+        // Seed Data into the Database
 //        seedDatabase();
 //        relatedBooks();
 //        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        //1 Find by age restriction
+        //2 Find by age restriction
 //        String ageRestrictionType = reader.readLine();
 //        booksByAgeRestriction(ageRestrictionType);
 
-        //2 Golden Edition
-//        String goldenType = "GOLD";
-//        EditionType editionType = EditionType.valueOf(goldenType.toUpperCase());
-//        List<Book> goldenEdition =
-//                bookService.findAllByEditionType(editionType);
-        //goldenEdition.stream().forEach(b -> System.out.println(b.getTitle()));
+        //3 Golden Edition
+//        List<String> goldenBooks = bookService.getGoldenBooks(EditionType.GOLD.getValue());
 
-        //3 Find by price
+
+        //4 Find by price
 //        List<Book> booksByPrice = bookService.findByPrice();
 //        booksByPrice.stream().forEach(b -> System.out.println(
 //                String.format("%s - %f $", b.getTitle(), b.getPrice())
 //        ));
 
         //4
+//        LocalDate date = LocalDate.now();
+//        List<String> notReleasedBooks = bookService.getNotReleasedBooks(date.getYear());
+//        notReleasedBooks.stream().forEach(System.out::println);
 
-
+        //5
+        String[] categoryNames = scanner.nextLine().split("\\s+");
+        List<String> categories = Arrays.asList(categoryNames);
+        List<String> titlesByCategory = bookService.getAllByCategories(categories);
+        titlesByCategory.stream().forEach(System.out::println);
     }
 
     private void booksByAgeRestriction(String ageRestrictionType) {

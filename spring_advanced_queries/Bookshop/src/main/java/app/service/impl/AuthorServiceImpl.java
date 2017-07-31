@@ -11,11 +11,10 @@ import java.util.List;
 
 @Service
 @Transactional
-public class AuthorServiceImpl implements AuthorService<Author, Long>{
+public class AuthorServiceImpl implements AuthorService {
 
     @Autowired
     private AuthorRepository authorRepository;
-
 
     @Override
     public void delete(Long id) {

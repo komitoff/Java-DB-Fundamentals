@@ -1,6 +1,7 @@
 package app.service.impl;
 
 import app.entities.AgeRestriction;
+import app.entities.Category;
 import app.entities.EditionType;
 import app.repository.api.BookRepository;
 import app.entities.Book;
@@ -9,12 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 @Service
 @Transactional
-public class BookServiceImpl implements BookService<Book, Long> {
+public class BookServiceImpl implements BookService {
 
     @Autowired
     private BookRepository bookRepository;
@@ -63,4 +65,21 @@ public class BookServiceImpl implements BookService<Book, Long> {
     public List<Book> findByPrice() {
         return this.bookRepository.findAllByPrice();
     }
+
+    @Override
+    public List<String> getNotReleasedBooks(int year) {
+        return this.bookRepository.getNotReleasedBooks(year);
+    }
+
+    @Override
+    public List<String> getAllByCategories(List<String> categories) {
+        return this.bookRepository.getAllByCategories(categories);
+    }
+
+
+//    @Override
+//    public List<String> getGoldenBooks(int editionType) {
+//        return this.bookRepository.getGoldenBooks(editionType);
+//    }
+
 }
