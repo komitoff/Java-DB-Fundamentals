@@ -1,6 +1,7 @@
 package app;
 
 import app.entities.*;
+import app.repository.api.AuthorRepository;
 import app.repository.api.BookRepository;
 import app.service.api.AuthorService;
 import app.service.api.BookService;
@@ -9,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -31,6 +34,12 @@ public class ConsoleRunner implements CommandLineRunner {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private BookRepository bookRepository;
+
+    @Autowired
+    private AuthorRepository authorRepository;
+
     private final Scanner scanner = new Scanner(System.in);
 
 
@@ -44,7 +53,7 @@ public class ConsoleRunner implements CommandLineRunner {
 //        String ageRestrictionType = reader.readLine();
 //        booksByAgeRestriction(ageRestrictionType);
 
-        //3 Golden Edition
+        //3 Golden Edition -> not working
 //        List<String> goldenBooks = bookService.getGoldenBooks(EditionType.GOLD.getValue());
 
 
@@ -54,16 +63,27 @@ public class ConsoleRunner implements CommandLineRunner {
 //                String.format("%s - %f $", b.getTitle(), b.getPrice())
 //        ));
 
-        //4
+        //5
 //        LocalDate date = LocalDate.now();
 //        List<String> notReleasedBooks = bookService.getNotReleasedBooks(date.getYear());
 //        notReleasedBooks.stream().forEach(System.out::println);
 
-        //5
-        String[] categoryNames = scanner.nextLine().split("\\s+");
-        List<String> categories = Arrays.asList(categoryNames);
-        List<String> titlesByCategory = bookService.getAllByCategories(categories);
-        titlesByCategory.stream().forEach(System.out::println);
+        //6
+//        String[] categoryNames = scanner.nextLine().split("\\s+");
+//        List<String> categories = Arrays.asList(categoryNames);
+//        List<String> titlesByCategory = bookService.getAllByCategories(categories);
+//        titlesByCategory.stream().forEach(System.out::println);
+        //7
+//        String[] inputParams = scanner.nextLine().split("-");
+//        String date = inputParams[2] + "-" + inputParams[1] + "-" + inputParams[0];
+//        List<String> books = bookRepository.findByReleaseDateBefore(date);
+//        for (String book : books) {
+//            System.out.println(book);
+//        }
+        //8
+        String ending = scanner.nextLine();
+        List<String> authorsByGivenEnding = authorRepository.getNamesEndingWith(ending);
+        authorsByGivenEnding.stream().forEach(System.out::println);
     }
 
     private void booksByAgeRestriction(String ageRestrictionType) {

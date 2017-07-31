@@ -47,4 +47,12 @@ public interface BookRepository extends JpaRepository<Book, Long>{
             "WHERE c.name IN :categories",
     nativeQuery = true)
     List<String> getAllByCategories(@Param("categories") List<String> categories);
+
+    @Query(value = "SELECT CONCAT_WS(\"-\", b.title, b.edition_type, b.price)\n" +
+            "FROM books AS b\n" +
+            "WHERE date(b.release_date) < :date",
+    nativeQuery = true)
+    List<String> findByReleaseDateBefore(@Param("date") String date);
+
+
 }
