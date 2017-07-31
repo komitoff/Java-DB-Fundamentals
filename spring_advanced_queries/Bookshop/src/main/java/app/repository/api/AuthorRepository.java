@@ -17,10 +17,10 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
             "INNER JOIN a.booksByAuthor b GROUP BY a.id ORDER BY books_count DESC")
     List<Object[]> findAuthorByBooksCount();
 
-    @Query(value = "SELECT concat_ws(' ', a.first_name, a.last_name) " +
+    @Query(value = "SELECT concat_ws(' ', a.fisrt_name, a.last_name) " +
             "FROM authors AS a " +
-            "WHERE a.first_name like %?1;",
+            "WHERE a.fisrt_name like CONCAT('%', :ending)",
     nativeQuery = true)
-    List<String> getNamesEndingWith(String ending);
+    List<String> getNamesEndingWith(@Param("ending") String ending);
 
 }

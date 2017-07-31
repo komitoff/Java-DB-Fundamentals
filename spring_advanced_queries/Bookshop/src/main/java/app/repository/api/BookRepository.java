@@ -54,5 +54,11 @@ public interface BookRepository extends JpaRepository<Book, Long>{
     nativeQuery = true)
     List<String> findByReleaseDateBefore(@Param("date") String date);
 
+    @Query(value = "SELECT b.title\n" +
+            "FROM books AS b\n" +
+            "WHERE b.title LIKE concat('%', :str, '%');",
+    nativeQuery = true)
+    List<String> getBooksContainingString(@Param("str") String str);
+
 
 }
