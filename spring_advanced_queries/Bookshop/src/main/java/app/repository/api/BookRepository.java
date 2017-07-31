@@ -4,6 +4,7 @@ import app.entities.AgeRestriction;
 import app.entities.Book;
 import app.entities.Category;
 import app.entities.EditionType;
+import com.sun.tracing.dtrace.ProviderAttributes;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -60,5 +61,39 @@ public interface BookRepository extends JpaRepository<Book, Long>{
     nativeQuery = true)
     List<String> getBooksContainingString(@Param("str") String str);
 
+    @Query(value = "SELECT CONCAT(b.title,'( ', a.fisrt_name, a.last_name, ' )')\n" +
+            "FROM books AS b\n" +
+            "INNER JOIN authors AS a\n" +
+            "ON b.author_id=a.author_id\n" +
+            "WHERE a.last_name LIKE CONCAT(:str,'%')",
+    nativeQuery = true)
+    List<String> booksWrittenByGivenAuthorLastNameContains(@Param("str") String str);
 
+    @Query(value = "SELECT count(*)\n" +
+            "FROM books AS b\n" +
+            "WHERE length(b.title) > :count",
+    nativeQuery = true)
+    int countOfBooksWithTitleLongerThan(@Param("count") int count);
+
+    @Query(value = "SELECT CONCAT(a.fisrt_name,' ', a.last_name,' - ' ,SUM(b.copies)) as total\n" +
+            "FROM books AS b\n" +
+            "INNER JOIN authors AS a\n" +
+            "ON b.author_id = a.author_id\n" +
+            "GROUP BY a.author_id\n" +
+            "ORDER BY count(b.copies) DESC",
+    nativeQuery = true)
+    List<String> getTotalNumberOfBookCopies();
+
+    @Query(value = "SELECT CONCAT(c.name, ' ', SUM(b.copies) * b.price, ' $')\n" +
+            "FROM books AS b\n" +
+            "INNER JOIN authors AS a\n" +
+            "ON b.author_id = a.author_id\n" +
+            "INNER JOIN books_categories AS bc\n" +
+            "ON bc.book_id = b.book_id\n" +
+            "INNER JOIN categories AS c\n" +
+            "ON bc.category_id = c.category_id\n" +
+            "GROUP BY c.name\n" +
+            "ORDER BY c.name ASC",
+    nativeQuery = true)
+    List<String> totalProfitByCategory();
 }

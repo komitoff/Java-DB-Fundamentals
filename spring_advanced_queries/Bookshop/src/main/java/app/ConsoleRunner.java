@@ -81,9 +81,30 @@ public class ConsoleRunner implements CommandLineRunner {
 //            System.out.println(book);
 //        }
         //8
-        String ending = scanner.nextLine();
-        List<String> authorsByGivenEnding = authorRepository.getNamesEndingWith(ending);
-        authorsByGivenEnding.stream().forEach(System.out::println);
+//        String ending = scanner.nextLine();
+//        List<String> authorsByGivenEnding = authorRepository.getNamesEndingWith(ending);
+//        authorsByGivenEnding.stream().forEach(System.out::println);
+        //9
+//        String str = scanner.nextLine();
+//        List<String> booksByGivenSubstr = bookRepository.getBooksContainingString(str);
+//        booksByGivenSubstr.stream().forEach(System.out::println);
+        //10
+//        String str = scanner.nextLine();
+//        List<String> booksWrittenByAuthors =
+//                bookRepository.booksWrittenByGivenAuthorLastNameContains(str);
+//        booksWrittenByAuthors.stream().forEach(System.out::println);
+        //11
+//        int count = Integer.parseInt(scanner.nextLine());
+//        int booksWithTitleLongerThanGivenCount =
+//                bookRepository.countOfBooksWithTitleLongerThan(count);
+//        System.out.println(booksWithTitleLongerThanGivenCount);
+        //12
+//        List<String> totalNumberOfBookCopies = bookRepository.getTotalNumberOfBookCopies();
+//        totalNumberOfBookCopies.stream().forEach(System.out::println);
+        //13
+        List<String> totalProfitByCategory =
+                bookRepository.totalProfitByCategory();
+        totalProfitByCategory.stream().forEach(System.out::println);
     }
 
     private void booksByAgeRestriction(String ageRestrictionType) {
