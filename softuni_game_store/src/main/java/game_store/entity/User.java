@@ -3,7 +3,6 @@ package game_store.entity;
 import game_store.entity.enums.Role;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
