@@ -3,7 +3,7 @@ package game_store.serviceImpl;
 import game_store.entity.User;
 import game_store.entity.enums.Role;
 import game_store.model.bindingModel.user.RegisterUser;
-import game_store.modelParser.ModelParser;
+import game_store.utils.ModelParser;
 import game_store.repository.UserRepository;
 import game_store.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

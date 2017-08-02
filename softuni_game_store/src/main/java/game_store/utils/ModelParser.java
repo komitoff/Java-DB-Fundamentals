@@ -1,4 +1,4 @@
-package game_store.modelParser;
+package game_store.utils;
 
 import org.modelmapper.ModelMapper;
 
