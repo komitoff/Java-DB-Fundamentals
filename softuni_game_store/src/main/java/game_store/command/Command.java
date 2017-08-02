@@ -2,13 +2,14 @@ package game_store.command;
 
 import game_store.service.GameService;
 import game_store.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class Command implements Executable {
 
     private UserService userService;
     private GameService gameService;
 
-    protected Command(UserService userService, GameService gameService) {
+    public Command(UserService userService, GameService gameService) {
         this.gameService = gameService;
         this.userService = userService;
     }

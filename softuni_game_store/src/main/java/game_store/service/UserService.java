@@ -1,7 +1,7 @@
 package game_store.service;
 
-/**
- * Created by tobieski on 8/1/2017.
- */
+import game_store.model.bindingModel.user.RegisterUser;
+
 public interface UserService {
+    void persist(RegisterUser registerUser);
 }
