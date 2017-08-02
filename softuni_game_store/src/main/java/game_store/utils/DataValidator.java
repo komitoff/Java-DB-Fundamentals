@@ -8,12 +8,23 @@ import javax.validation.ValidatorFactory;
 import java.util.Set;
 
 public class DataValidator {
-    public static <T> String validate(T target) {
+    public static <T> String getInvalidParameterMessage(T target) {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Set<ConstraintViolation<T>> constraints =
                 factory.getValidator().validate(target);
         for (ConstraintViolation<T> constraint : constraints) {
-            
+            return constraint.getMessage();
         }
+        return null;
+    }
+
+    public static <T> boolean isValid(T target) {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Set<ConstraintViolation<T>> constraints =
+                factory.getValidator().validate(target);
+        for (ConstraintViolation<T> constraint : constraints) {
+            return false;
+        }
+        return true;
     }
 }
