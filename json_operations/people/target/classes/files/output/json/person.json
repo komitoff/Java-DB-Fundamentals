@@ -1,0 +1,11 @@
+{
+  "id": 1,
+  "firstName": "Ivan",
+  "lastName": "Georgiev",
+  "phoneJsonDtos": [
+    {
+      "number": "54262152",
+      "personId": 0
+    }
+  ]
+}
