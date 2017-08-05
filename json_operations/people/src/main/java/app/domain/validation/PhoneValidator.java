@@ -1,7 +1,5 @@
 package app.domain.validation;
 
-import app.domain.model.PhoneNumber;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 

@@ -3,6 +3,11 @@
     <id>1</id>
     <firstName>Ivan</firstName>
     <lastName>Georgiev</lastName>
+    <address>
+        <country>Bulgaria</country>
+        <city>Sofia</city>
+        <street>Mladost</street>
+    </address>
     <phoneNumbers>
         <phoneNumbers>
             <number>54262152</number>
