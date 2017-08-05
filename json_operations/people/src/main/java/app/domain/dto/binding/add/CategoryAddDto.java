@@ -1,12 +1,12 @@
-package app.domain.dto.json;
+package app.domain.dto.binding.add;
 
 import com.google.gson.annotations.Expose;
 
-public class CategoryJsonDto {
+public class CategoryAddDto {
     @Expose
     private String name;
 
-    public CategoryJsonDto() {}
+    public CategoryAddDto() {}
 
     public String getName() {
         return name;

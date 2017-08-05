@@ -1,4 +1,4 @@
-package app.domain.dto.json;
+package app.domain.dto.binding.add;
 
 import com.google.gson.annotations.Expose;
 import com.sun.xml.internal.txw2.annotation.XmlElement;
@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class UserJsonDto {
+public class UserAddDto {
 
     @Expose
     private String firstName;
@@ -18,7 +18,7 @@ public class UserJsonDto {
     @Expose
     private Integer age;
 
-    public UserJsonDto() {}
+    public UserAddDto() {}
 
     public String getFirstName() {
         return firstName;

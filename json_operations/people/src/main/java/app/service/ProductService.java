@@ -1,7 +1,7 @@
 package app.service;
 
-import app.domain.dto.json.ProductJsonDto;
+import app.domain.dto.binding.add.ProductAddDto;
 
 public interface ProductService {
-    void save(ProductJsonDto productJsonDto);
+    void save(ProductAddDto productJsonDto);
 }

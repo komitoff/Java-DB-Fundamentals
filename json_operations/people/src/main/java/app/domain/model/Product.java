@@ -48,7 +48,7 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "buyer_id",
     referencedColumnName = "id",
     foreignKey = @ForeignKey(name = "FK_product_buyer"))
@@ -60,7 +60,7 @@ public class Product implements Serializable {
         this.bayerId = bayerId;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "seller_id",
     referencedColumnName = "id",
     foreignKey = @ForeignKey(name = "FK_product_seller"))
@@ -74,9 +74,9 @@ public class Product implements Serializable {
 
     @ManyToMany
     @JoinTable(name = "categories_products",
-    joinColumns = @JoinColumn(name = "product_id",
+    joinColumns = @JoinColumn(name = "category_id",
     referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "category_id",
+    inverseJoinColumns = @JoinColumn(name = "product_id",
     referencedColumnName = "id"),
     foreignKey = @ForeignKey(name = "fk_products_categories_products"),
     inverseForeignKey = @ForeignKey(name = "fk_products_categories_categories"))
