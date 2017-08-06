@@ -60,7 +60,7 @@ public class Product implements Serializable {
         this.bayerId = bayerId;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "seller_id",
     referencedColumnName = "id",
     foreignKey = @ForeignKey(name = "FK_product_seller"))
@@ -72,7 +72,7 @@ public class Product implements Serializable {
         this.sellerId = sellerId;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "categories_products",
     joinColumns = @JoinColumn(name = "category_id",
     referencedColumnName = "id"),

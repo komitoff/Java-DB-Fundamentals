@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
         List<UserDto> userDtos = new ArrayList<>();
 
         for (User user : users) {
-            UserDto userDto = ModelParser.getInstance().map(users, UserDto.class);
+            UserDto userDto = ModelParser.getInstance().map(user, UserDto.class);
             userDtos.add(userDto);
         }
 

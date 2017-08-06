@@ -29,7 +29,7 @@ public class CategoryServiceImpl implements CategoryService {
         List<Category> allCategories = this.categoryRepository.findAll();
         List<CategoryDto> allCategoriesDto = new ArrayList<>();
         for (Category category : allCategories) {
-            CategoryDto categoryDto = ModelParser.getInstance().map(allCategories, CategoryDto.class);
+            CategoryDto categoryDto = ModelParser.getInstance().map(category, CategoryDto.class);
             allCategoriesDto.add(categoryDto);
         }
 

@@ -89,8 +89,8 @@ public class Terminal implements CommandLineRunner {
 
                 }
                 product.setCategories(categoryDtoSet);
-                product.setBayerId(buyer);
                 product.setSellerId(seller);
+                product.setBayerId(buyer);
                 this.productService.save(product);
                 count ++;
             }

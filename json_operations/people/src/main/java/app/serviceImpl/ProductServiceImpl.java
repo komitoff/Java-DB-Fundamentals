@@ -17,6 +17,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void save(ProductAddDto productJsonDto) {
         Product product = ModelParser.getInstance().map(productJsonDto, Product.class);
-        this.productRepository.saveAndFlush(product);
+        this.productRepository.save(product);
     }
 }
