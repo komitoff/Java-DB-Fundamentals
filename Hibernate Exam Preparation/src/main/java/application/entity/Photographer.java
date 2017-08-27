@@ -34,8 +34,10 @@ public class Photographer {
     referencedColumnName = "id")
     private Camera secondaryCamera;
 
+    @OneToMany(mappedBy = "owner")
     private Set<Accessory> accessories;
 
+    @OneToMany(mappedBy = "owner")
     private Set<Lens> lenses;
 
     public Photographer() {}

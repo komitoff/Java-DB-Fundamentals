@@ -12,7 +12,8 @@ public class Lens {
     private Long id;
 
     @Column(name = "make")
-    private String make;
+    @Enumerated(EnumType.STRING)
+    private Enum make;
 
     @Column(name = "max_aperture", precision = 1)
     private Double maxAperture;
@@ -20,7 +21,9 @@ public class Lens {
     @Column(name = "focal_length")
     private Integer focalLength;
 
-    private Set<String> compatibleWith;
+    @Column(name = "compatible_with")
+    @Enumerated(EnumType.STRING)
+    private Enum compatibleWith;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id",
@@ -37,11 +40,11 @@ public class Lens {
         this.id = id;
     }
 
-    public String getMake() {
+    public Enum getMake() {
         return make;
     }
 
-    public void setMake(String make) {
+    public void setMake(Enum make) {
         this.make = make;
     }
 
@@ -61,11 +64,11 @@ public class Lens {
         this.focalLength = focalLength;
     }
 
-    public Set<String> getCompatibleWith() {
+    public Enum getCompatibleWith() {
         return compatibleWith;
     }
 
-    public void setCompatibleWith(Set<String> compatibleWith) {
+    public void setCompatibleWith(Enum compatibleWith) {
         this.compatibleWith = compatibleWith;
     }
 
